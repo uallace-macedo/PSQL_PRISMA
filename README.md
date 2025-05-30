@@ -1,6 +1,6 @@
-# 🐘 PSQL_SEQUELIZE
+# 🐘 PSQL_PRISMA
 
-Projeto para entender o uso de **ORMs `(Sequelize)`** com Node e PostgreSQL.
+Projeto para entender o uso de **ORMs `(Prisma)`** com Node e PostgreSQL.
 
 ---
 
@@ -16,10 +16,8 @@ Projeto para entender o uso de **ORMs `(Sequelize)`** com Node e PostgreSQL.
 
 ### 💡 Especificas
 
-- 🧬 `Sequelize`
-- 🔗 `Sequelize-cli`
-- 🛢️ `pg`
-- 🗃️ `pg-hstore`
+- 💎 `prisma`: interface para desenvolvimento - gerencia comandos no terminal
+- 🔮 `@prisma/client`: gerencia comunicação com o banco de dados
 
 ### 🧩 Banco de Dados
 
