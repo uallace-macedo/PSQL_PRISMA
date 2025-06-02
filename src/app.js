@@ -2,12 +2,14 @@ import express from 'express';
 import cors from 'cors';
 
 import routes from './routes.js';
+import { baseErrorMiddleware, prismaErrorMiddleware } from './app/middlewares/error.middleware.js';
 
 class App {
   constructor() {
     this.app = new express();
     this.setMiddlewares()
     this.setRoutes();
+    this.setErrorMiddleware();
   }
 
   setMiddlewares() {
@@ -18,6 +20,11 @@ class App {
   
   setRoutes() {
     this.app.use(routes);
+  }
+
+  setErrorMiddleware() {
+    this.app.use(prismaErrorMiddleware);
+    this.app.use(baseErrorMiddleware);
   }
 }
 
