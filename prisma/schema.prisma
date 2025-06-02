@@ -8,14 +8,14 @@ datasource db {
 }
 
 model User {
-  id String @id
+  id Int @id @default(autoincrement())
   nome String
   sobrenome String?
   idade Int
 }
 
 model Veiculo {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   modelo String
   marca String?
 }

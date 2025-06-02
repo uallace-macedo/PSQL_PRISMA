@@ -1,12 +1,7 @@
 import { Router } from 'express';
+import UserRoutes from './modules/user/user.routes.js';
 
 const routes = new Router();
-routes.get('/', (req, res) => {
-  res.status(200).json({ status: 'success', message: 'Rota inicial' });
-});
-
-routes.get('/user', (req, res) => {
-  res.status(200).json({ status: 'success', message: 'Rota user' });
-});
+routes.use('/user', UserRoutes);
 
 export default routes;
