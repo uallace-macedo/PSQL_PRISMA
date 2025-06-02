@@ -2,7 +2,7 @@
 
 ## 📚 Sumário
 
-- [🚀 Inicialização](#inicialização)
+- [💎 Prisma](#-prisma)
 - [📦 Models](#models)
   - [📘 Tipos](#tipos)
   - [🔧 Tipos derivados - Comportamento](#tipos-derivados---comportamento)
@@ -13,10 +13,11 @@
   - [📄 Básico](#básico)
   - [🔍 Buscas avançadas](#buscas-avançadas)
   - [🔗 Relações](#relações)
+- [🚀 Como rodar o projeto](#-como-rodar-o-projeto)
 
 ---
 
-## 🚀 Inicialização
+## 💎 Prisma
 1. `Instalação`
   ```bash
   yarn add prisma -D
@@ -58,7 +59,6 @@ Os models são criados no `prisma/schema.prisma`
 | `DateTime`  | Data e hora (formato ISO) | `TIMESTAMP`, `DATETIME`   |
 | `Json`      | Objeto ou array JSON      | `JSON`, `TEXT`            |
 | `Bytes`     | Dados binários            | `BLOB`, `BYTEA`           |
-|||
 
 ### 🔧 Tipos derivados - Comportamento
 - `@id` → chave primária
@@ -210,3 +210,33 @@ model Branch {
     },
   });
   ```
+
+---
+
+## 🚀 Como rodar o projeto
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/seu-projeto.git
+
+# 2. Entre na pasta do projeto
+cd seu-projeto
+
+# 3. Instale as dependências
+yarn install
+# ou, se usar npm:
+# npm install
+
+# 4. Configure as variáveis de ambiente
+# Crie um arquivo .env (baseado no exemplo .env.example)
+cp .env.example .env
+# Depois, ajuste as variáveis dentro do .env (como URL do banco, etc)
+
+# 5. Rode as migrações e popule o banco (se tiver seed)
+npx prisma migrate dev
+npx prisma db seed
+
+# 6. Inicie o projeto
+yarn dev
+# ou
+# npm run dev
+```

@@ -1,4 +1,4 @@
-# 🐘 PSQL_PRISMA
+# 🐘💎 PSQL_PRISMA
 
 Projeto para entender o uso de **ORMs `(Prisma)`** com Node e PostgreSQL.
 
