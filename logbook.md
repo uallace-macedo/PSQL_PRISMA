@@ -1,6 +1,22 @@
 # 🐘 PSQL_PRISMA
 
-## Esquema Prisma
+## 📚 Sumário
+
+- [🚀 Inicialização](#inicialização)
+- [📦 Models](#models)
+  - [📘 Tipos](#tipos)
+  - [🔧 Tipos derivados - Comportamento](#tipos-derivados---comportamento)
+  - [🎨 Tipos personalizados - Enum](#tipos-personalizados---enum)
+  - [🔗 Relacionamentos](#relacionamentos)
+- [🛠️ Comandos úteis](#comandos-úteis)
+- [🧩 Manipulação do banco](#manipulação-do-banco)
+  - [📄 Básico](#básico)
+  - [🔍 Buscas avançadas](#buscas-avançadas)
+  - [🔗 Relações](#relações)
+
+---
+
+## 🚀 Inicialização
 1. `Instalação`
   ```bash
   yarn add prisma -D
@@ -26,10 +42,62 @@
   npx prisma migrate dev --name nome-migration
   ```
 
-## Models
+## 📦 Models
 Os models são criados no `prisma/schema.prisma`
 
-## Comandos úteis
+### 📘 Tipos
+
+| Tipo Prisma | Descrição                 | Equivalência SQL          |
+|-------------|---------------------------|---------------------------|
+| `String`    | Texto                     | `VARCHAR`, `TEXT`         |
+| `Int`       | Inteiro 32 bits           | `INTEGER`                 |
+| `BigInt`    | Inteiro 64 bits           | `BIGINT`                  |
+| `Float`     | Número decimal            | `FLOAT`, `REAL`, `DOUBLE` |
+| `Decimal`   | Decimal de alta precisão  | `DECIMAL`, `NUMERIC`      |
+| `Boolean`   | Valor verdadeiro/falso    | `BOOLEAN`                 |
+| `DateTime`  | Data e hora (formato ISO) | `TIMESTAMP`, `DATETIME`   |
+| `Json`      | Objeto ou array JSON      | `JSON`, `TEXT`            |
+| `Bytes`     | Dados binários            | `BLOB`, `BYTEA`           |
+|||
+
+### 🔧 Tipos derivados - Comportamento
+- `@id` → chave primária
+- `@default()` → valor padrão
+- `@unique` → valor único
+- `@updatedAt` → atualiza automaticamente
+- `?` → campo opcional (nullable)
+- `[]` → array (relação ou tipo lista, dependendo do contexto)
+
+### 🎨 Tipos personalizados - Enum
+```prisma
+enum Role {
+  USER
+  ADMIN
+  MODERATOR
+}
+
+model User {
+  id   Int   @id @default(autoincrement())
+  role Role  @default(USER)
+}
+```
+
+### 🔗 Relacionamentos
+```prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  posts Post[]
+}
+
+model Post {
+  id       Int   @id @default(autoincrement())
+  userId   Int
+  user     User  @relation(fields: [userId], references: [id])
+}
+```
+
+
+## 🛠️ Comandos úteis
 
 1. `npx prisma generate`
   Para criar pastas de geração
@@ -43,13 +111,13 @@ Os models são criados no `prisma/schema.prisma`
 4. `npx prisma studio`
   Página web para manipulação do banco de dados
 
-## Manipulação do banco
+## 🧩 Manipulação do banco
 
-### Básico
+### 📄 Básico
 
 ```js
 // Criação
-await prisma.model.create(data);
+await prisma.model.create({ data });
 await prisma.model.createMany({ data: [] });
 
 // Leitura
@@ -64,10 +132,10 @@ await prisma.model.delete({ where: {...} });
 
 ```
 
-### Buscas avançadas
+### 🔍 Buscas avançadas
 ```js
 // Criação
-await prisma.model.create(data);
+await prisma.model.create({ data });
 await prisma.model.createMany({
   data: [],
   skipDuplicates: true // opcional, ignora duplicatas no campo único
@@ -97,7 +165,7 @@ await prisma.user.deleteMany({
 
 ```
 
-### Relações
+### 🔗 Relações
 
 ```prisma
 model User {
